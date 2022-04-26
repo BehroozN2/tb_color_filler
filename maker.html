@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/styles/default.min.css" rel="stylesheet">
+    <title>Team Building - Color Filler - Make Your Bot</title>
+    <style>
+        #team_function {
+            font-family: Consolas, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+            font-size: 75%;
+        }
+    </style>
+</head>
+<body>
+<div class="container py-5">
+    <div class="clearfix">
+        <a href="index.html" class="float-end small">&leftarrow; Home</a>
+        <h1>Make Your Bot</h1>
+    </div>
+    <hr>
+    <div class="mb-3">
+        <label class="form-label fw-bold">Help:</label>
+        <ul>
+            <li>Your function is called each turn to get your move for that turn.</li>
+            <li>You must return one of these values: <code>top</code>, <code>bottom</code>, <code>left</code>, <code>right</code>.</li>
+            <li>Invalid values or values which result in an out of bound position are ignored.</li>
+            <li>Function parameters:
+                <ul>
+                    <li><strong>x:</strong> Your current horizontal position, a number between 1 (left) and 20 (right).</li>
+                    <li><strong>y:</strong> Your current vertical position, a number between 1 (top) and 20 (bottom).</li>
+                    <li><strong>turn:</strong> Current turn, a number between 1 and 1000.</li>
+                    <li><strong>memory:</strong> A JavaScript object which you can use to save values as properties on it. You can access previously stored properties on this object in future turns. Example:
+                        <pre><code class="language-javascript">if (turn === 1) {
+    memory.something = 'abcd';
+} else {
+    console.log(memory.something);
+    // this outputs 'abcd'
+    // in browser's console
+}</code></pre>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <hr>
+    <div class="mb-3">
+        <label for="team_name" class="form-label fw-bold">What is your team's name? (max 30 characters)</label>
+        <input id="team_name" type="text" class="form-control" maxlength="30">
+    </div>
+    <div class="mb-3">
+        <label for="team_color" class="form-label fw-bold">Select a color for your team:</label>
+        <input id="team_color" type="color" class="form-control form-control-color" value="#000000">
+    </div>
+    <div class="mb-3">
+        <label for="team_function" class="form-label fw-bold">Write your function here (JavaScript):</label>
+        <textarea id="team_function" class="form-control" rows="10">function (x, y, turn, memory) {
+    // ... write your logic here ...
+}</textarea>
+    </div>
+    <div class="row my-3">
+        <div class="col d-grid">
+            <button id="button_test" type="button" class="btn btn-secondary">Test Your Code</button>
+        </div>
+        <div class="col d-grid">
+            <button id="button_test_stop" type="button" class="btn btn-secondary">Stop</button>
+        </div>
+        <div class="col d-grid">
+            <button id="button_export" type="button" class="btn btn-secondary">Export</button>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="d-inline-block">
+            <div id="board_wrapper" class="invisible"></div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<script src="game.js"></script>
+<script src="maker.js"></script>
+</body>
+</html>
