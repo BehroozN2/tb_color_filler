@@ -88,22 +88,25 @@ let Game = function (wrapper) {
             let playerX = player.position[0];
             let playerY = player.position[1];
 
-            let playerMove = player.fn(playerX + 1, playerY + 1, self.currentTurn, player.memory);
+            try {
+                let playerMove = player.fn(playerX + 1, playerY + 1, self.currentTurn, player.memory);
 
-            if (playerMove === 'top') {
-                playerY--;
-            } else if (playerMove === 'bottom') {
-                playerY++;
-            } else if (playerMove === 'left') {
-                playerX--;
-            } else if (playerMove === 'right') {
-                playerX++;
+                if (playerMove === 'top') {
+                    playerY--;
+                } else if (playerMove === 'bottom') {
+                    playerY++;
+                } else if (playerMove === 'left') {
+                    playerX--;
+                } else if (playerMove === 'right') {
+                    playerX++;
+                }
+
+                player.position = [
+                    Math.max(Math.min(playerX, self.constants.BOARD_SIZE - 1), 0),
+                    Math.max(Math.min(playerY, self.constants.BOARD_SIZE - 1), 0),
+                ];
+            } catch (ignored) {
             }
-
-            player.position = [
-                Math.max(Math.min(playerX, self.constants.BOARD_SIZE - 1), 0),
-                Math.max(Math.min(playerY, self.constants.BOARD_SIZE - 1), 0),
-            ];
         });
     };
 
