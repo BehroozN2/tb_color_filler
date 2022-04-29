@@ -174,7 +174,15 @@ let Game = function (wrapper) {
                         )
                     )
                     .append(
-                        $('<span></span>', {text: player.name + ': '})
+                        $(
+                            '<span></span>',
+                            {
+                                class: 'player',
+                                style: 'cursor: pointer;',
+                                'data-index': playerIndex,
+                                text: player.name + ': '
+                            }
+                        )
                     )
                     .append(
                         $(
@@ -247,6 +255,39 @@ let Game = function (wrapper) {
         });
 
         self.drawHelpers();
+
+        self.wrapper.on('click', '.player', function (e) {
+            var playerIndex = parseInt($(e.currentTarget).attr('data-index'));
+            var playerFn = self.players[playerIndex].fn;
+
+            $('body').append(
+                $(
+                    '<div></div>',
+                    {
+                        class: 'position-fixed top-0 start-0 w-100 h-100 p-5 overflow-auto',
+                        style: 'background-color: rgba(0, 0, 0, 0.75);'
+                    }
+                )
+                    .append(
+                        $('<pre></pre>').append(
+                            $(
+                                '<code></code>',
+                                {
+                                    class: 'fs-4 language-javascript'
+                                }
+                            )
+                                .html(playerFn.toString())
+                        )
+                    )
+                    .on('click', function (e) {
+                        if (e.target.tagName.toUpperCase() === 'DIV') {
+                            $(this).remove();
+                        }
+                    })
+            );
+
+            hljs.highlightAll();
+        });
     };
 
     self.initiate();
